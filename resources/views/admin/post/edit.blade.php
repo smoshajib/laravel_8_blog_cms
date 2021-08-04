@@ -31,7 +31,6 @@
                         </div>
 
                         <div class="form-group @if($errors->has('sub_title')) has-error @endif">
-                          
                             <label>Sub Title</label>
                             <input class="form-control" name="sub_title" value="{{$post->sub_title}}">
                             @if ($errors->has('sub_title'))

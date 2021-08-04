@@ -8,45 +8,55 @@
                     <div class="card-header">Page - create</div>
 
                     <div class="card-body">
-                        {!! Form::open(['route' => 'pages.store']) !!}
+                        
+                        <form action="{{route('pages.store')}}" method="post">
+                            @csrf
                         <div class="box-body">
                             <div class="form-group @if($errors->has('thumbnail')) has-error @endif">
-                                {!! Form::label('Thumbnail') !!}
-                                {!! Form::text('thumbnail', null, ['class' => 'form-control', 'placeholder' => 'Thumbnail']) !!}
+                                <label>Thumbnail</label>
+                            <input class="form-control" name="thumbnail" placeholder="Thumbnail ">
+                            
                                 @if ($errors->has('thumbnail'))
                                     <span class="help-block">{!! $errors->first('thumbnail') !!}</span>@endif
                             </div>
 
                             <div class="form-group @if($errors->has('title')) has-error @endif">
-                                {!! Form::label('Title') !!}
-                                {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Title']) !!}
+                                <label>Title</label>
+                            <input class="form-control" name="title" >
+                           
                                 @if ($errors->has('title'))
                                     <span class="help-block">{!! $errors->first('title') !!}</span>@endif
                             </div>
 
                             <div class="form-group @if($errors->has('sub_title')) has-error @endif">
-                                {!! Form::label('Sub Title') !!}
-                                {!! Form::text('sub_title', null, ['class' => 'form-control', 'placeholder' => 'Sub Title']) !!}
+                                <label>Sub Title</label>
+                                <input class="form-control" name="sub_title" >
+                                
                                 @if ($errors->has('sub_title'))
                                     <span class="help-block">{!! $errors->first('sub_title') !!}</span>@endif
                             </div>
 
                             <div class="form-group @if($errors->has('details')) has-error @endif">
-                                {!! Form::label('Details') !!}
-                                {!! Form::textarea('details', null, ['class' => 'form-control', 'placeholder' => 'Details']) !!}
+                                <label>Details</label>
+                            <textarea class="form-control" name="details"></textarea>
+                           
                                 @if ($errors->has('details'))
                                     <span class="help-block">{!! $errors->first('details') !!}</span>@endif
                             </div>
 
                             <div class="form-group">
-                                {!! Form::label('Publish') !!}
-                                {!! Form::select('is_published', [1 => 'Publish', 0 => 'Draft'], null, ['class' => 'form-control']) !!}
+                                <label>Status</label>
+                                <select class="form-control" name="is_published"> 
+                                    <option disabled selected>Select Status</option>
+                                    <option value="1">Published</option>
+                                    <option value="0">Draft</option>
+                                </select> 
                             </div>
                         </div>
                         <div class="box-footer">
-                            {!! Form::submit('Create',['class' => 'btn btn-sm btn-primary']) !!}
+                            <button class="btn btn-sm btn-info">Save</button>
                         </div>
-                        {!! Form::close() !!}
+                    </form>
                     </div>
                 </div>
             </div>

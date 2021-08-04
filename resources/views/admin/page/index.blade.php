@@ -44,13 +44,12 @@
                                 <tr>
                                     <th scope="row">{{ $page->id }}</th>
                                     <td>{{ $page->title }}</td>
-                                    <td>{{ $page->user->name }}</td>
+                                    <td>{{ Auth::user()->name }}</td>
                                     <td>
                                         <a href="{{ route('pages.edit', $page->id) }}"
                                            class="btn btn-sm btn-primary">Edit</a>
-                                        {!! Form::open(['route' => ['pages.destroy', $page->id], 'method' => 'delete', 'style' => 'display:inline']) !!}
-                                        {!! Form::submit('Delete',['class' => 'btn btn-sm btn-danger']) !!}
-                                        {!! Form::close() !!}
+                                           <a href="{{ route('pages.destroy',$page->id) }}" onclick="event.preventDefault();document.getElementById('page-delete').submit();" class="btn btn-sm btn-danger">Delete</a>
+                                           <form action="{{ route('pages.destroy', $page->id) }}" id="page-delete" method="post">@csrf  @method('DELETE')</form>
                                     </td>
                                 </tr>
                             @endforeach

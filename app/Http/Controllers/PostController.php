@@ -43,20 +43,20 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     "thumbnail" => 'required',
-        //     "title" => 'required|unique:posts',
-        //     "details" => "required",
-        //     "category_id" => "required"
-        // ],
-        //     [
-        //         'thumbnail.required' => 'Enter thumbnail url',
-        //         'title.required' => 'Enter title',
-        //         'title.unique' => 'Title already exist',
-        //         'details.required' => 'Enter details',
-        //         'category_id.required' => 'Select categories',
-        //     ]
-        // );
+        $this->validate($request, [
+            "thumbnail" => 'required',
+            "title" => 'required|unique:posts',
+            "details" => "required",
+            "category_id" => "required"
+        ],
+            [
+                'thumbnail.required' => 'Enter thumbnail url',
+                'title.required' => 'Enter title',
+                'title.unique' => 'Title already exist',
+                'details.required' => 'Enter details',
+                'category_id.required' => 'Select categories',
+            ]
+        );
 
         $post = new  Post();
         $post->user_id = Auth::id();
