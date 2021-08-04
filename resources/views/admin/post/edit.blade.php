@@ -12,50 +12,63 @@
                     <div class="card-header">Post - edit</div>
 
                     <div class="card-body">
-                        {!! Form::open(['route' => ['posts.update', $post->id], 'method' => 'put']) !!}
-                        <div class="form-group @if($errors->has('thumbnail')) has-error @endif">
-                            {!! Form::label('Thumbnail') !!}
-                            {!! Form::text('thumbnail', $post->thumbnail, ['class' => 'form-control', 'placeholder' => 'Thumbnail']) !!}
-                            @if ($errors->has('thumbnail'))
+                        
+                          <form  action="{{route('posts.update',$post->id)}}" method="post">
+                            @csrf
+                            @method('PUT')
+                            <div class="form-group @if($errors->has('thumbnail')) has-error @endif">
+                                <label>Thumbnail</label>
+                                <input class="form-control" name="thumbnail" value="{{$post->thumbnail}}">
+                                @if ($errors->has('thumbnail'))
                                 <span class="help-block">{!! $errors->first('thumbnail') !!}</span>@endif
                         </div>
 
                         <div class="form-group @if($errors->has('title')) has-error @endif">
-                            {!! Form::label('Title') !!}
-                            {!! Form::text('title', $post->title, ['class' => 'form-control', 'placeholder' => 'Title']) !!}
+                                <label>Title</label>
+                                <input class="form-control" name="title" value="{{$post->title}}">
                             @if ($errors->has('title'))
                                 <span class="help-block">{!! $errors->first('title') !!}</span>@endif
                         </div>
 
                         <div class="form-group @if($errors->has('sub_title')) has-error @endif">
-                            {!! Form::label('Sub Title') !!}
-                            {!! Form::text('sub_title', $post->sub_title, ['class' => 'form-control', 'placeholder' => 'Sub Title']) !!}
+                          
+                            <label>Sub Title</label>
+                            <input class="form-control" name="sub_title" value="{{$post->sub_title}}">
                             @if ($errors->has('sub_title'))
                                 <span class="help-block">{!! $errors->first('sub_title') !!}</span>@endif
                         </div>
 
                         <div class="form-group @if($errors->has('details')) has-error @endif">
-                            {!! Form::label('Details') !!}
-                            {!! Form::textarea('details', $post->details, ['class' => 'form-control', 'placeholder' => 'Details']) !!}
+                            <label>Details</label>
+                            <textarea class="form-control" name="details">{{$post->details}}</textarea>
                             @if ($errors->has('details'))
                                 <span class="help-block">{!! $errors->first('details') !!}</span>@endif
                         </div>
 
                         <div class="form-group @if($errors->has('category_id')) has-error @endif">
-                            {!! Form::label('Category') !!}
-                            {!! Form::select('category_id[]', $categories, null, ['class' => 'form-control', 'id' => 'category_id', 'multiple' => 'multiple']) !!}
+                            <label>Category Name</label>
+                            <select class="form-control" name="category_id[]" multiple="multiple" id="category_id"> 
+                                <option disabled>Select Status</option>
+                                @foreach($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
                             @if ($errors->has('category_id'))
                                 <span class="help-block">{!! $errors->first('category_id') !!}</span>
                             @endif
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('Publish') !!}
-                            {!! Form::select('is_published', [1 => 'Publish', 0 => 'Draft'], null, ['class' => 'form-control']) !!}
+                            <label>Status</label>
+                            <select class="form-control" name="is_published"> 
+                                <option disabled selected>Select Status</option>
+                                <option value="1" {{ $post->is_published == 1 ? 'selected' : '' }}>Published</option>
+                                <option value="0" {{ $post->is_published == 0 ? 'selected' : '' }}>Draft</option>
+                            </select>  
                         </div>
 
-                        {!! Form::submit('Update',['class' => 'btn btn-sm btn-warning']) !!}
-                        {!! Form::close() !!}
+                        <button class="btn btn-sm btn-info">Update</button>
+                    </form>
                     </div>
                 </div>
             </div>

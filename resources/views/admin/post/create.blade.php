@@ -14,37 +14,43 @@
                     <div class="card-body">
                         
                         <form action="{{route('posts.store')}}" method="post">
+                            @csrf
                         <div class="form-group @if($errors->has('thumbnail')) has-error @endif">
-                            {!! Form::label('Thumbnail') !!}
-                            {!! Form::text('thumbnail', null, ['class' => 'form-control', 'placeholder' => 'Thumbnail']) !!}
+                            <label>Thumbnail</label>
+                            <input class="form-control" name="thumbnail" >
                             @if ($errors->has('thumbnail'))
                                 <span class="help-block">{!! $errors->first('thumbnail') !!}</span>@endif
                         </div>
 
                         <div class="form-group @if($errors->has('title')) has-error @endif">
-                            {!! Form::label('Title') !!}
-                            {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Title']) !!}
+                            <label>Title</label>
+                            <input class="form-control" name="title" >
                             @if ($errors->has('title'))
                                 <span class="help-block">{!! $errors->first('title') !!}</span>@endif
                         </div>
 
                         <div class="form-group @if($errors->has('sub_title')) has-error @endif">
-                            {!! Form::label('Sub Title') !!}
-                            {!! Form::text('sub_title', null, ['class' => 'form-control', 'placeholder' => 'Sub Title']) !!}
+                            <label>Sub Title</label>
+                            <input class="form-control" name="sub_title" >
                             @if ($errors->has('sub_title'))
                                 <span class="help-block">{!! $errors->first('sub_title') !!}</span>@endif
                         </div>
 
                         <div class="form-group @if($errors->has('details')) has-error @endif">
-                            {!! Form::label('Details') !!}
-                            {!! Form::textarea('details', null, ['class' => 'form-control', 'placeholder' => 'Details']) !!}
+                            <label>Details</label>
+                            <textarea class="form-control" name="details"></textarea>
                             @if ($errors->has('details'))
                                 <span class="help-block">{!! $errors->first('details') !!}</span>@endif
                         </div>
 
                         <div class="form-group @if($errors->has('category_id')) has-error @endif">
-                            {!! Form::label('Category') !!}
-                            {!! Form::select('category_id[]', $categories, null, ['class' => 'form-control', 'id' => 'category_id', 'multiple' => 'multiple']) !!}
+                           <label>Category Name</label>
+                            <select class="form-control" name="category_id[]" multiple="multiple" id="category_id"> 
+                                <option disabled>Select Status</option>
+                                @foreach($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
                             @if ($errors->has('category_id'))
                                 <span class="help-block">{!! $errors->first('category_id') !!}</span>
                             @endif
