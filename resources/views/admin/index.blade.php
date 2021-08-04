@@ -22,7 +22,7 @@
                                 <tr>
                                     <td>{{ $category->id }}</td>
                                     <td>{{ $category->name }}</td>
-                                    <td>{{ $category->user->name }}</td>
+                                    <td>{{ Auth::user()->name }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -48,7 +48,7 @@
                                 <tr>
                                     <td>{{ $post->id }}</td>
                                     <td>{{ $post->title }}</td>
-                                    <td>{{ $post->user->name }}</td>
+                                    <td>{{ Auth::user()->name}}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -74,7 +74,7 @@
                                 <tr>
                                     <td>{{ $page->id }}</td>
                                     <td>{{ $page->title }}</td>
-                                    <td>{{ $page->user->name }}</td>
+                                    <td>{{ Auth::user()->name}}</td>
                                 </tr>
                             @endforeach
                             </tbody>

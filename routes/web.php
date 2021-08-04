@@ -19,9 +19,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('categories',App\Http\Controllers\CategoryController::class);
     Route::resource('posts',App\Http\Controllers\PostController::class);
     Route::resource('pages',App\Http\Controllers\PageController::class);
