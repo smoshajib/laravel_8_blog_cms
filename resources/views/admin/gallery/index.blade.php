@@ -34,7 +34,9 @@
                             <thead>
                             <tr>
                                 <th scope="col" width="60">#</th>
+                                <th scope="col" width="60">Image</th>
                                 <th scope="col">Url</th>
+                                <th scope="col" width="100">Copy Url</th>
                                 <th scope="col" width="200">Created By</th>
                                 <th scope="col" width="129">Action</th>
                             </tr>
@@ -44,14 +46,15 @@
                             @foreach($galleries as $gallery)
                                 <tr>
                                     <td>{{ $gallery->id }}</td>
-                                    <td>{{ asset('storage/galleries/' . $gallery->image_url) }}</td>
-                                    <td>{{ $gallery->user->name }}</td>
+                                    <td><img width="50" src="{{ asset('storage/app/public/galleries/'.$gallery->image_url)}}" alt=""></td>
+                                    <td><p  style="width:500px" id="{{ $gallery->id }}">{{ asset('storage/app/public/galleries/' . $gallery->image_url) }}</p></td>
+                                    <td width="100"><button class="btn btn-sm btn-primary" onclick="copyToClipboard('#{{ $gallery->id }}')">Copy Url</button></td>
+                                    <td>{{ Auth::user()->name }}</td>
                                     <td>
-                                        <a href="{{ route('galleries.edit', $gallery->id) }}"
-                                           class="btn btn-sm btn-primary">Edit</a>
-                                        {!! Form::open(['route' => ['galleries.destroy', $gallery->id], 'method' => 'delete', 'style' => 'display:inline']) !!}
-                                        {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger']) !!}
-                                        {!! Form::close() !!}
+                                        {{-- <a href="{{ route('galleries.edit', $gallery->id) }}"
+                                           class="btn btn-sm btn-primary">Edit</a> --}}
+                                           <a href="{{ route('galleries.destroy',$gallery->id) }}" onclick="event.preventDefault();document.getElementById('galleries-delete').submit();" class="btn btn-sm btn-danger">Delete</a>
+                                           <form action="{{ route('galleries.destroy', $gallery->id) }}" id="galleries-delete" method="post">@csrf  @method('DELETE')</form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -62,4 +65,14 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function copyToClipboard(element) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+        }
+    </script>
 @endsection

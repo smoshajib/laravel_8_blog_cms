@@ -8,17 +8,21 @@
                     <div class="card-header">Gallery - create</div>
 
                     <div class="card-body">
-                        {!! Form::open(['route' => 'galleries.store', 'enctype' => 'multipart/form-data']) !!}
-
+                        
+                        <form  action="{{route('galleries.store')}}" method="post" enctype="multipart/form-data">
+                            @csrf
                         <div class="form-group @if($errors->has('image_url')) has-error @endif">
-                            {!! Form::label('Image url', null, ['style' => 'display: block;']) !!}
-                            {!! Form::file('image_url[]', ['multiple' => 'multiple']) !!}
+                            <label>Image Url</label>
+                            <input class="form-control" type="file" name="image_url[]" multiple="multiple">
+                            
                             @if ($errors->has('image_url'))<span
                                     class="help-block">{!! $errors->first('image_url') !!}</span>@endif
                         </div>
 
-                        {!! Form::submit('Create',['class' => 'btn btn-sm btn-primary']) !!}
-                        {!! Form::close() !!}
+                        <div class="box-footer">
+                            <button class="btn btn-sm btn-info">Update</button>
+                        </div>
+                    </form>
                     </div>
                 </div>
             </div>
