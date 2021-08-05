@@ -46,7 +46,7 @@
                             @foreach($galleries as $gallery)
                                 <tr>
                                     <td>{{ $gallery->id }}</td>
-                                    <td><img width="50" src="{{ asset('storage/galleries/'.$gallery->image_url)}}" alt=""></td>
+                                    <td><img width="50" src="{{ url('storage/galleries/'.$gallery->image_url)}}" alt=""></td>
                                     <td><p  style="width:500px" id="{{ $gallery->id }}">{{ asset('storage/app/public/galleries/' . $gallery->image_url) }}</p></td>
                                     <td width="100"><button class="btn btn-sm btn-primary" onclick="copyToClipboard('#{{ $gallery->id }}')">Copy Url</button></td>
                                     <td>{{ Auth::user()->name }}</td>
