@@ -12,13 +12,6 @@
                         <form action="{{route('categories.update',$category->id)}}" method="post">
                             @csrf
                             @method('PUT')
-                        <div class="form-group @if($errors->has('thumbnail')) has-error @endif">
-                            <label>Thumbnail</label>
-                            <input class="form-control" name="thumbnail" placeholder="Thumbnail " value="{{$category->thumbnail}}">
-                            @if ($errors->has('thumbnail'))
-                                <span class="help-block">{!! $errors->first('thumbnail') !!}</span>@endif
-                        </div>
-
 
                         <div class="form-group">
                             <label>Name</label>
@@ -33,6 +26,14 @@
                                 <option value="0" {{ $category->is_published == 0 ? 'selected' : '' }}>Draft</option>
                             </select>
                       
+                        </div>
+
+                        <div class="form-group @if($errors->has('featured_image')) has-error @endif">
+                            <label>Featured Image</label>
+                            <input type="file" class="form-control" name="featured_image" >
+                            
+                            @if ($errors->has('featured_image'))
+                                <span class="help-block">{!! $errors->first('featured_image') !!}</span>@endif
                         </div>
 
                         <button class="btn btn-sm btn-warning">Update</button>
