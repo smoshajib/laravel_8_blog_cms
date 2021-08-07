@@ -55,7 +55,7 @@ class PageController extends Controller
         );
 
         $page = new  Post();
-        $page->user_id = Auth::id();
+        $page->admin_id = \auth('admin')->id();;
         $page->thumbnail = $request->thumbnail;
         $page->title = $request->title;
         $page->slug = str::slug($request->title);
@@ -115,7 +115,7 @@ class PageController extends Controller
         );
 
         $page = Post::findOrFail($id);
-        $page->user_id = Auth::id();
+        $page->admin_id = \auth('admin')->id();;
         $page->thumbnail = $request->thumbnail;
         $page->title = $request->title;
         $page->slug = str::slug($request->title);

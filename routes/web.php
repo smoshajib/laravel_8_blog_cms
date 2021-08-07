@@ -21,9 +21,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-    Route::resource('categories',App\Http\Controllers\CategoryController::class);
-    Route::resource('posts',App\Http\Controllers\PostController::class);
-    Route::resource('pages',App\Http\Controllers\PageController::class);
-    Route::resource('galleries',App\Http\Controllers\GalleryController::class);
-});
+//Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+//    Route::resource('categories',App\Http\Controllers\CategoryController::class);
+//    Route::resource('posts',App\Http\Controllers\PostController::class);
+//    Route::resource('pages',App\Http\Controllers\PageController::class);
+//    Route::resource('galleries',App\Http\Controllers\GalleryController::class);
+//});

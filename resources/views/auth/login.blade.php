@@ -19,12 +19,12 @@
         <div class="row">
 
             <div class="col-md-3"></div>
-               
-            
+
+
             <div class="col-md-6" >
                 <h2 class="font-bold">Admin Login</h2>
                 <div class="ibox-content">
-                    <form action="{{ route('login') }}" method="post">
+                    <form action="{{ route('admin-login.submit') }}" method="post">
                         @if (Session::get('fail'))
                         <div class="alert alert-danger">
                             {{ Session::get('fail') }}
@@ -42,7 +42,7 @@
                         <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
 
                     </form>
-                  
+
                 </div>
             </div>
             <div class="col-md-3"></div>

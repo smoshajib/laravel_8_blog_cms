@@ -61,7 +61,7 @@ class GalleryController extends Controller
             $fileNameToStore = $fileName . '_' . time() . '.' . $fileExt;
 
             $gallery = new Gallery();
-            $gallery->user_id = Auth::id();
+            $gallery->admin_id = \auth('admin')->id();;
             $gallery->image_url = $fileNameToStore;
             $save = $gallery->save();
 

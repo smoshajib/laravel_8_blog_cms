@@ -3,12 +3,12 @@
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element">
-                    
-                        <img alt="image" class="rounded-circle" src="{{asset('/')}}public/backend/img/profile_small.jpg"/>
 
-                    
+                        <img alt="image" class="rounded-circle" src="{{asset('backend/img/profile_small.jpg')}}"/>
+
+
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                        <span class="block m-t-xs font-bold">{{ Auth::user()->name }}</span>
+                        <span class="block m-t-xs font-bold">{{ Auth::guard('admin')->user()->name }}</span>
                         <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -26,7 +26,7 @@
                     IN+
                 </div>
             </li>
-           
+
             <li>
                 <a href="{{ route('home') }}"><i class="fa fa-diamond"></i> <span class="nav-label">Home</span></a>
             </li>
@@ -42,7 +42,7 @@
             <li>
                 <a href="{{ route('galleries.index') }}"><i class="fa fa-diamond"></i> <span class="nav-label">Galleries</span></a>
             </li>
-          
+
         </ul>
 
     </div>

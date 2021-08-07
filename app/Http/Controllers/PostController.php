@@ -59,7 +59,7 @@ class PostController extends Controller
         );
 
         $post = new  Post();
-        $post->user_id = Auth::id();
+        $post->admin_id = \auth('admin')->id();;
         $post->thumbnail = $request->thumbnail;
         $post->title = $request->title;
         $post->slug = str::slug($request->title);
@@ -71,7 +71,7 @@ class PostController extends Controller
 
         $post->categories()->sync($request->category_id,$post->id);
         // dd($request->category_id);
-        
+
 
         Session::flash('message', 'Post created successfully');
         return redirect()->route('posts.index');
@@ -96,7 +96,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        
+
         $categories=Category::all();
         $post=Post::findOrFail($id);
         return view('admin.post.edit', compact('categories','post'));
@@ -126,7 +126,7 @@ class PostController extends Controller
             ]
         );
 
-        $post->user_id = Auth::id();
+        $post->admin_id = \auth('admin')->id();;
         $post->thumbnail = $request->thumbnail;
         $post->title = $request->title;
         $post->slug = str::slug($request->title);
