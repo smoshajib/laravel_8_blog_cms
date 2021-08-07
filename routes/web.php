@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('web.layouts.master');
+    $data="shajib";
+    return view('web.pages.home',compact('data'));
 });
 
 Auth::routes();
