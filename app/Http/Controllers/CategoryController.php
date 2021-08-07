@@ -45,7 +45,6 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
         $this->validate($request, [
             'name' => 'required|unique:categories'
         ],
@@ -54,11 +53,7 @@ class CategoryController extends Controller
             'name.unique' => 'Category already exist',
         ]);
 
-
-        $category = new Category();
-        $category->name = $request->name;
-        $category->is_published = $request->is_published;
-        $category->save();
+        $this->category->create($request->except('_token'));
 
         Session::flash('message', 'Category created successfully');
         return redirect()->route('categories.index');
@@ -106,10 +101,7 @@ class CategoryController extends Controller
                 'name.unique' => 'Category already exist',
             ]);
 
-        $category->thumbnail = $request->thumbnail;
-        $category->name = $request->name;
-        $category->is_published = $request->is_published;
-        $category->save();
+        $this->category->update($category->id, $request->except('_token'));
 
         Session::flash('message', 'Category updated successfully');
         return redirect()->route('categories.index');
@@ -124,7 +116,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         // $category=Category::findOrFail($id);
-        $category->delete();
         Session::flash('delete-message', 'Category deleted successfully');
         return redirect()->route('categories.index');
     }
