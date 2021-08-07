@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Cms\Interfaces\CategoryRepositoryInterface;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -9,6 +10,12 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
+    protected $category;
+    public function __construct(CategoryRepositoryInterface $category)
+    {
+        $this->category = $category;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,11 +45,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        return $request->all();
         $this->validate($request, [
             'name' => 'required|unique:categories'
         ],
         [
-            'thumbnail.required' => 'Enter thumbnail url',
             'name.required' => 'Enter name',
             'name.unique' => 'Category already exist',
         ]);

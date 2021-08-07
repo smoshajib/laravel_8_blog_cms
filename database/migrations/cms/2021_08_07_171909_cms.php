@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostsTable extends Migration
+class Cms extends Migration
 {
     /**
      * Run the migrations.
@@ -13,6 +13,16 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
+            $table->string('slug')->unique();
+            $table->enum('is_published', ['1', '0']);
+            $table->string('featured_image')->nullable();
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('admin_id');
@@ -25,8 +35,17 @@ class CreatePostsTable extends Migration
             $table->string('featured_image')->nullable();
             $table->softDeletes();
             $table->timestamps();
-
             $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
+        });
+
+        Schema::create('category_posts', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('post_id');
+            $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
     }
 
@@ -37,6 +56,8 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('categories');
         Schema::dropIfExists('posts');
+        Schema::dropIfExists('category_posts');
     }
 }
