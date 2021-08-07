@@ -35,7 +35,6 @@
                             <tr>
                                 <th scope="col" width="60">#</th>
                                 <th scope="col">Name</th>
-                                <th scope="col" width="200">Created By</th>
                                 <th scope="col" width="129">Action</th>
                             </tr>
                             </thead>
@@ -45,7 +44,6 @@
                                 <tr>
                                     <td>{{ $category->id }}</td>
                                     <td>{{ $category->name }}</td>
-                                    <td>{{ Auth::user()->name }}</td>
                                     <td>
                                         <a href="{{ route('categories.edit', $category->id) }}"
                                            class="btn btn-sm btn-primary">Edit</a>

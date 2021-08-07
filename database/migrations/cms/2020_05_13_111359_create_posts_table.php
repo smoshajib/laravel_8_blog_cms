@@ -23,6 +23,7 @@ class CreatePostsTable extends Migration
             $table->string('post_type')->nullable();
             $table->enum('is_published', ['1', '0']);
             $table->string('featured_image')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');

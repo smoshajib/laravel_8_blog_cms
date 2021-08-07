@@ -39,7 +39,6 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'thumbnail' => 'required',
             'name' => 'required|unique:categories'
         ],
         [
@@ -50,7 +49,6 @@ class CategoryController extends Controller
 
 
         $category = new Category();
-        $category->admin_id = \auth('admin')->id();;
         $category->name = $request->name;
         $category->is_published = $request->is_published;
         $category->save();
@@ -102,9 +100,7 @@ class CategoryController extends Controller
             ]);
 
         $category->thumbnail = $request->thumbnail;
-        $category->admin_id = \auth('admin')->id();;
         $category->name = $request->name;
-        $category->slug = Str::slug($request->name);
         $category->is_published = $request->is_published;
         $category->save();
 

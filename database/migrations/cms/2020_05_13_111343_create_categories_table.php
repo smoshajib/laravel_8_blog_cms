@@ -19,6 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->string('slug')->unique();
             $table->enum('is_published', ['1', '0']);
             $table->string('featured_image')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
