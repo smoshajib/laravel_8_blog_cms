@@ -17,7 +17,7 @@ class Cms extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->enum('is_published', ['1', '0']);
+            $table->boolean('is_published')->default(true);
             $table->string('featured_image')->nullable();
             $table->softDeletes();
             $table->timestamps();
@@ -28,11 +28,10 @@ class Cms extends Migration
             $table->unsignedBigInteger('admin_id');
             $table->string('title')->unique();
             $table->string('slug')->unique();
-            $table->string('sub_title')->nullable();
-            $table->text('details')->nullable();
+            $table->string('excerpt')->nullable();
+            $table->longText('content')->nullable();
             $table->string('post_type')->nullable();
-            $table->enum('is_published', ['1', '0']);
-            $table->string('featured_image')->nullable();
+            $table->boolean('is_published')->default(true);
             $table->softDeletes();
             $table->timestamps();
             $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
@@ -47,6 +46,14 @@ class Cms extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
+
+        Schema::create('metas', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('post_id');
+            $table->string('meta_key')->nullable();
+            $table->longText('meta_value')->nullable();
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+        });
     }
 
     /**
@@ -59,5 +66,6 @@ class Cms extends Migration
         Schema::dropIfExists('categories');
         Schema::dropIfExists('posts');
         Schema::dropIfExists('category_posts');
+        Schema::dropIfExists('metas');
     }
 }

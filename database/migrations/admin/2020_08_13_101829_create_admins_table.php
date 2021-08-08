@@ -22,6 +22,7 @@ class CreateAdminsTable extends Migration
             $table->boolean('active')->default(true);
             $table->string('profile_image_url', 255)->nullable();
             $table->string('contact_number', 39)->nullable();
+            $table->string('template',255)->nullable();
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
+    public function __construct()
+    {
+        
+        $this->middleware('airmin');
+        $this->middleware('auth:admin');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +24,7 @@ class GalleryController extends Controller
     public function index()
     {
         $galleries = Gallery::orderBy('id', 'DESC')->get();
-        return view('admin.gallery.index', compact('galleries'));
+        return view('cms.pages.gallery.index', compact('galleries'));
     }
 
     /**
@@ -28,7 +34,7 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        return view('admin.gallery.create');
+        return view('cms.pages.gallery.create');
     }
 
     /**

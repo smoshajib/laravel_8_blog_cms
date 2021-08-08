@@ -17,27 +17,33 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+
+        $this->middleware('airmin');
+        $this->middleware('auth:admin');
+    }
     public function index()
     {
         $pages = Post::orderBy('id', 'DESC')->where('post_type', 'page')->get();
-        return view('admin.pages.page.index', compact('pages'));
+        return view('cms.pages.page.index', compact('pages'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function create()
     {
-        return view('admin.pages.page.create');
+        return view('cms.pages.page.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -84,12 +90,12 @@ class PageController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
         $page = Post::findOrFail($id);
-        return view('admin.pages.page.edit', compact('page'));
+        return view('cms.pages.page.edit', compact('page'));
     }
 
     /**
@@ -97,7 +103,7 @@ class PageController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
@@ -132,7 +138,7 @@ class PageController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {

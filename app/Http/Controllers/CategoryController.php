@@ -26,7 +26,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::orderBy('id', 'DESC')->get();
-        return view('admin.pages.category.index', compact('categories'));
+        return view('cms.pages.category.index', compact('categories'));
     }
 
     /**
@@ -36,7 +36,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.category.create');
+        return view('cms.pages.category.create');
     }
 
     /**
@@ -82,7 +82,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category=Category::findOrFail($id);
-        return view('admin.pages.category.edit', compact('category'));
+        return view('cms.pages.category.edit', compact('category'));
     }
 
     /**

@@ -1,4 +1,4 @@
-@extends('admin.layouts.admin_master')
+@extends('cms.layouts.admin_master')
 
 @section('style')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet"/>
@@ -12,11 +12,11 @@
                     <div class="card-header">Post - edit</div>
 
                     <div class="card-body">
-                        
+
                           <form  action="{{route('posts.update',$post->id)}}" method="post">
                             @csrf
                             @method('PUT')
-                          
+
 
                         <div class="form-group @if($errors->has('title')) has-error @endif">
                                 <label>Title</label>
@@ -25,23 +25,23 @@
                                 <span class="help-block">{!! $errors->first('title') !!}</span>@endif
                         </div>
 
-                        <div class="form-group @if($errors->has('sub_title')) has-error @endif">
+                        <div class="form-group @if($errors->has('excerpt')) has-error @endif">
                             <label>Sub Title</label>
-                            <input class="form-control" name="sub_title" value="{{$post->sub_title}}">
-                            @if ($errors->has('sub_title'))
-                                <span class="help-block">{!! $errors->first('sub_title') !!}</span>@endif
+                            <input class="form-control" name="excerpt" value="{{$post->excerpt}}">
+                            @if ($errors->has('excerpt'))
+                                <span class="help-block">{!! $errors->first('excerpt') !!}</span>@endif
                         </div>
 
-                        <div class="form-group @if($errors->has('details')) has-error @endif">
-                            <label>Details</label>
-                            <textarea class="form-control" name="details">{{$post->details}}</textarea>
-                            @if ($errors->has('details'))
-                                <span class="help-block">{!! $errors->first('details') !!}</span>@endif
+                        <div class="form-group @if($errors->has('content')) has-error @endif">
+                            <label>content</label>
+                            <textarea class="form-control" name="content">{{$post->content}}</textarea>
+                            @if ($errors->has('content'))
+                                <span class="help-block">{!! $errors->first('content') !!}</span>@endif
                         </div>
 
                         <div class="form-group @if($errors->has('category_id')) has-error @endif">
                             <label>Category Name</label>
-                            <select class="form-control" name="category_id[]" multiple="multiple" id="category_id"> 
+                            <select class="form-control" name="category_id[]" multiple="multiple" id="category_id">
                                 <option disabled>Select Status</option>
                                 @foreach($categories as $category)
                                 <option value="{{$category->id}}">{{$category->name}}</option>
@@ -54,16 +54,16 @@
 
                         <div class="form-group">
                             <label>Status</label>
-                            <select class="form-control" name="is_published"> 
+                            <select class="form-control" name="is_published">
                                 <option disabled selected>Select Status</option>
                                 <option value="1" {{ $post->is_published == 1 ? 'selected' : '' }}>Published</option>
                                 <option value="0" {{ $post->is_published == 0 ? 'selected' : '' }}>Draft</option>
-                            </select>  
+                            </select>
                         </div>
                         <div class="form-group @if($errors->has('featured_image')) has-error @endif">
                             <label>Featured Image</label>
                             <input type="file" class="form-control" name="featured_image" >
-                            
+
                             @if ($errors->has('featured_image'))
                                 <span class="help-block">{!! $errors->first('featured_image') !!}</span>@endif
                         </div>
@@ -85,7 +85,7 @@
 
     <script>
         $(document).ready(function () {
-            CKEDITOR.replace('details');
+            CKEDITOR.replace('content');
 
             $('#category_id').select2({
                 placeholder: "Select categories"

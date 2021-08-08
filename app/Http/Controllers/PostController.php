@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cms\Interfaces\CategoryRepositoryInterface;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\CategoryPost;
@@ -13,70 +14,59 @@ use App\Cms\Interfaces\PostRepositoryInterface;
 
 class PostController extends Controller
 {
+    protected $post;
+    protected $category;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    protected $post;
-    public function __construct(PostRepositoryInterface $post)
+    public function __construct(PostRepositoryInterface $post, CategoryRepositoryInterface $category)
     {
         $this->post = $post;
+        $this->category = $category;
         $this->middleware('airmin');
         $this->middleware('auth:admin');
     }
     public function index()
     {
         $posts = Post::orderBy('id', 'DESC')->where('post_type', 'post')->get();
-        return view('admin.pages.post.index', compact('posts'));
+        return view('cms.pages.post.index', compact('posts'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function create()
     {
         $categories = Category::orderBy('name', 'ASC')->get();
-//        dd($categories);
-        return view('admin.pages.post.create', compact('categories'));
+        return view('cms.pages.post.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
+        $request->merge([
+            'admin_id' => \auth('admin')->id(),
+            'post_type' => 'post'
+        ]);
         $this->validate($request, [
-            "thumbnail" => 'required',
-            "title" => 'required|unique:posts',
-            "details" => "required",
-            "category_id" => "required"
-        ],
+                "title" => 'required|unique:posts',
+            ],
             [
-                'thumbnail.required' => 'Enter thumbnail url',
                 'title.required' => 'Enter title',
                 'title.unique' => 'Title already exist',
-                'details.required' => 'Enter details',
-                'category_id.required' => 'Select categories',
             ]
         );
-
-        $post = new  Post();
-        $post->admin_id = \auth('admin')->id();;
-        $post->thumbnail = $request->thumbnail;
-        $post->title = $request->title;
-        $post->slug = str::slug($request->title);
-        $post->sub_title = $request->sub_title;
-        $post->details = $request->details;
-        $post->is_published = $request->is_published;
-        $post->post_type = 'post';
-        $post->save();
+        $data = $request->only(['admin_id','title', 'slug', 'excerpt', 'content', 'post_type', 'is_published']);
+        $post = $this->post->create($data);
 
         $post->categories()->sync($request->category_id,$post->id);
         // dd($request->category_id);
@@ -101,14 +91,14 @@ class PostController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
 
         $categories=Category::all();
         $post=Post::findOrFail($id);
-        return view('admin.pages.post.edit', compact('categories','post'));
+        return view('cms.pages.post.edit', compact('categories','post'));
     }
 
     /**
@@ -116,35 +106,26 @@ class PostController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Post $post)
     {
+        $request->merge([
+            'admin_id' => \auth('admin')->id(),
+            'post_type' => 'post'
+        ]);
         $this->validate($request, [
-            "thumbnail" => 'required',
-            'title' => 'required|unique:posts,title,' . $post->id . ',id', // ignore this id
-            'details' => 'required',
-            "category_id" => "required"
-        ],
+                'title' => 'required|unique:posts,title,' . $post->id . ',id', // ignore this id
+            ],
             [
-                'thumbnail.required' => 'Enter thumbnail url',
                 'title.required' => 'Enter title',
                 'title.unique' => 'Title already exist',
-                'details.required' => 'Enter details',
-                'category_id.required' => 'Select categories',
             ]
         );
 
-        $post->admin_id = \auth('admin')->id();;
-        $post->thumbnail = $request->thumbnail;
-        $post->title = $request->title;
-        $post->slug = str::slug($request->title);
-        $post->sub_title = $request->sub_title;
-        $post->details = $request->details;
-        $post->is_published = $request->is_published;
-        $post->save();
-
-        $post->categories()->sync($request->category_id);
+        $data = $request->only(['admin_id','title', 'slug', 'excerpt', 'content', 'post_type', 'is_published']);
+        $postUpdate = $this->post->update($post->id, $data);
+        $postUpdate->categories()->sync($request->input('category_id'));
 
         Session::flash('message', 'Post updated successfully');
         return redirect()->route('posts.index');

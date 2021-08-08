@@ -2,9 +2,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
-
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\GalleryController;
 Route::get('/', function () {
-    return view('admin.auth.login');
+    return view('cms.auth.login');
 });
 
 Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
@@ -13,7 +16,9 @@ Route::post('login', [AuthController::class, 'adminLoginPost'])->name('admin-log
 Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
 
 
-Route::resource('categories',App\Http\Controllers\CategoryController::class);
-Route::resource('posts',App\Http\Controllers\PostController::class);
-Route::resource('pages',App\Http\Controllers\PageController::class);
-Route::resource('galleries',App\Http\Controllers\GalleryController::class);
+Route::resources([
+    'categories' => CategoryController::class,
+    'posts' => PostController::class,
+    'pages' => PageController::class,
+    'galleries' => GalleryController::class
+]);
