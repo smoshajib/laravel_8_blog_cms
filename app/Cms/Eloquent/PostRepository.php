@@ -77,4 +77,9 @@ class PostRepository extends AbstractRepository implements PostRepositoryInterfa
             );
         return $data;
     }
+
+    public function getPosts($order, $type = 'post')
+    {
+        return $this->model->orderBy('id', $order)->where('post_type', $type)->get();
+    }
 }

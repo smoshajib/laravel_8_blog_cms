@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Cms\Interfaces\CategoryRepositoryInterface;
+use App\Cms\Interfaces\PostRepositoryInterface;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\CategoryPost;
@@ -12,20 +14,24 @@ use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
+    protected $post;
+    protected $category;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
+    public function __construct(PostRepositoryInterface $post, CategoryRepositoryInterface $category)
     {
-
+        $this->post = $post;
+        $this->category = $category;
         $this->middleware('airmin');
         $this->middleware('auth:admin');
     }
+
     public function index()
     {
-        $pages = Post::orderBy('id', 'DESC')->where('post_type', 'page')->get();
+        $pages = $this->post->getPosts('DESC', 'page');
         return view('cms.pages.page.index', compact('pages'));
     }
 
@@ -47,32 +53,23 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
+        $request->merge([
+            'admin_id' => \auth('admin')->id(),
+            'post_type' => 'page'
+        ]);
         $this->validate($request, [
-            "thumbnail" => 'required',
             "title" => 'required|unique:posts',
-            "details" => "required",
         ],
             [
-                'thumbnail.required' => 'Enter thumbnail url',
                 'title.required' => 'Enter title',
                 'title.unique' => 'Title already exist',
-                'details.required' => 'Enter details',
             ]
         );
-
-        $page = new  Post();
-        $page->admin_id = \auth('admin')->id();;
-        $page->thumbnail = $request->thumbnail;
-        $page->title = $request->title;
-        $page->slug = str::slug($request->title);
-        $page->sub_title = $request->sub_title;
-        $page->details = $request->details;
-        $page->is_published = $request->is_published;
-        $page->post_type = 'page';
-        $page->save();
+        $data = $request->only(['admin_id','title', 'slug', 'excerpt', 'content', 'post_type', 'is_published']);
+        $post = $this->post->create($data);
 
         Session::flash('message', 'Page created successfully');
-        return redirect()->route('admin.pages.page.index');
+        return redirect()->route('cms.pages.page.index');
     }
 
     /**
@@ -131,7 +128,7 @@ class PageController extends Controller
         $page->save();
 
         Session::flash('message', 'Page updated successfully');
-        return redirect()->route('admin.pages.page.index');
+        return redirect()->route('cms.pages.page.index');
     }
 
     /**

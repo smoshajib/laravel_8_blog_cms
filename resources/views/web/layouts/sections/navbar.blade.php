@@ -17,7 +17,7 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="tracking.html">Tracking</a>
+            <a class="nav-link" href="{{ route('site', ['tracking']) }}">Tracking</a>
           </li>
           <li class="nav-item ml-lg-3">
             <a class="nav-link" href="location.html">Location</a>

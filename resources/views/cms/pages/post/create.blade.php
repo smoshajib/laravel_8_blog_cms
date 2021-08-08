@@ -12,10 +12,10 @@
                     <div class="card-header">Post - create</div>
 
                     <div class="card-body">
-                        
+
                         <form action="{{route('posts.store')}}" method="post">
                             @csrf
-                      
+
 
                         <div class="form-group @if($errors->has('title')) has-error @endif">
                             <label>Title</label>
@@ -40,7 +40,7 @@
 
                         <div class="form-group @if($errors->has('category_id')) has-error @endif">
                            <label>Category Name</label>
-                            <select class="form-control" name="category_id[]" multiple="multiple" id="category_id"> 
+                            <select class="form-control" name="category_id[]" multiple="multiple" id="category_id">
                                 <option disabled>Select Status</option>
                                 @foreach($categories as $category)
                                 <option value="{{$category->id}}">{{$category->name}}</option>
@@ -52,18 +52,28 @@
                         </div>
 
                         <div class="form-group">
+                           <label>Page Template</label>
+                            <select class="form-control" name="template">
+                                <option disabled>Select Template</option>
+                                @foreach($templates as $template)
+                                <option value="{{$template}}">{{$template}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <label>Status</label>
-                            <select class="form-control" name="is_published"> 
+                            <select class="form-control" name="is_published">
                                 <option disabled selected>Select Status</option>
                                 <option value="1">Published</option>
                                 <option value="0">Draft</option>
                             </select>
-                      
+
                         </div>
                         <div class="form-group @if($errors->has('featured_image')) has-error @endif">
                             <label>Featured Image</label>
                             <input type="file" class="form-control" name="featured_image" >
-                            
+
                             @if ($errors->has('featured_image'))
                                 <span class="help-block">{!! $errors->first('featured_image') !!}</span>@endif
                         </div>

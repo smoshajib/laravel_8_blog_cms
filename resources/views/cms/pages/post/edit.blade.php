@@ -51,7 +51,15 @@
                                 <span class="help-block">{!! $errors->first('category_id') !!}</span>
                             @endif
                         </div>
-
+                          <div class="form-group">
+                              <label>Page Template</label>
+                              <select class="form-control" name="template">
+                                  <option disabled>Select Template</option>
+                                  @foreach($templates as $template)
+                                      <option value="{{$template}}" @if($template == $post->template) selected @endif>{{$template}}</option>
+                                  @endforeach
+                              </select>
+                          </div>
                         <div class="form-group">
                             <label>Status</label>
                             <select class="form-control" name="is_published">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Alright\Options\Options;
 use App\Cms\Interfaces\CategoryRepositoryInterface;
 use App\Models\Post;
 use App\Models\Category;
@@ -16,6 +17,7 @@ class PostController extends Controller
 {
     protected $post;
     protected $category;
+    protected $templates;
     /**
      * Display a listing of the resource.
      *
@@ -25,6 +27,7 @@ class PostController extends Controller
     {
         $this->post = $post;
         $this->category = $category;
+        $this->templates = Options::get_option('page_templates');
         $this->middleware('airmin');
         $this->middleware('auth:admin');
     }
@@ -42,7 +45,8 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::orderBy('name', 'ASC')->get();
-        return view('cms.pages.post.create', compact('categories'));
+        $templates = $this->templates;
+        return view('cms.pages.post.create', compact('categories', 'templates'));
     }
 
     /**
@@ -82,9 +86,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+        return $post->template;
     }
 
     /**
@@ -96,9 +100,10 @@ class PostController extends Controller
     public function edit($id)
     {
 
-        $categories=Category::all();
+        $categories= $this->category->getAll();
+        $templates = $this->templates;
         $post=Post::findOrFail($id);
-        return view('cms.pages.post.edit', compact('categories','post'));
+        return view('cms.pages.post.edit', compact('categories', 'templates', 'post'));
     }
 
     /**

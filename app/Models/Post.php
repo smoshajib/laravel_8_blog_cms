@@ -11,7 +11,7 @@ use Spatie\Sluggable\SlugOptions;
 class Post extends Model
 {
     use HasFactory,HasSlug, SoftDeletes;
-    protected $fillable = ['admin_id','title', 'slug', 'excerpt', 'content', 'post_type', 'is_published'];
+    protected $fillable = ['admin_id','title', 'slug', 'excerpt', 'content', 'post_type', 'template', 'is_published'];
 
     public function categories()
     {
@@ -27,5 +27,15 @@ class Post extends Model
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

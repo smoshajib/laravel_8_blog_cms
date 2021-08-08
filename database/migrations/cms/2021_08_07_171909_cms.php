@@ -31,6 +31,7 @@ class Cms extends Migration
             $table->string('excerpt')->nullable();
             $table->longText('content')->nullable();
             $table->string('post_type')->nullable();
+            $table->string('template')->default('default');
             $table->boolean('is_published')->default(true);
             $table->softDeletes();
             $table->timestamps();
