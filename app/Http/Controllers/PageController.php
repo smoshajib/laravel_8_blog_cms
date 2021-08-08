@@ -20,7 +20,7 @@ class PageController extends Controller
     public function index()
     {
         $pages = Post::orderBy('id', 'DESC')->where('post_type', 'page')->get();
-        return view('admin.page.index', compact('pages'));
+        return view('admin.pages.page.index', compact('pages'));
     }
 
     /**
@@ -30,7 +30,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        return view('admin.page.create');
+        return view('admin.pages.page.create');
     }
 
     /**
@@ -66,7 +66,7 @@ class PageController extends Controller
         $page->save();
 
         Session::flash('message', 'Page created successfully');
-        return redirect()->route('pages.index');
+        return redirect()->route('admin.pages.page.index');
     }
 
     /**
@@ -89,7 +89,7 @@ class PageController extends Controller
     public function edit($id)
     {
         $page = Post::findOrFail($id);
-        return view('admin/page/edit', compact('page'));
+        return view('admin.pages.page.edit', compact('page'));
     }
 
     /**
@@ -125,7 +125,7 @@ class PageController extends Controller
         $page->save();
 
         Session::flash('message', 'Page updated successfully');
-        return redirect()->route('pages.index');
+        return redirect()->route('admin.pages.page.index');
     }
 
     /**
@@ -139,6 +139,6 @@ class PageController extends Controller
         $page = Post::findOrFail($id);
         $page->delete();
         Session::flash('delete-message', 'Post page deleted successfully');
-        return redirect()->route('pages.index');
+        return redirect()->route('admin.pages.page.index');
     }
 }
