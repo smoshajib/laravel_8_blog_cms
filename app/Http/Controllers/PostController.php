@@ -29,7 +29,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::orderBy('id', 'DESC')->where('post_type', 'post')->get();
-        return view('admin.pages.post.index', compact('posts'));
+        return view('cms.pages.post.index', compact('posts'));
     }
 
     /**
@@ -41,7 +41,7 @@ class PostController extends Controller
     {
         $categories = Category::orderBy('name', 'ASC')->get();
 //        dd($categories);
-        return view('admin.pages.post.create', compact('categories'));
+        return view('cms.pages.post.create', compact('categories'));
     }
 
     /**
@@ -108,7 +108,7 @@ class PostController extends Controller
 
         $categories=Category::all();
         $post=Post::findOrFail($id);
-        return view('admin.pages.post.edit', compact('categories','post'));
+        return view('cms.pages.post.edit', compact('categories','post'));
     }
 
     /**

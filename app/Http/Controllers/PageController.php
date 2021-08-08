@@ -17,10 +17,16 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        
+        $this->middleware('airmin');
+        $this->middleware('auth:admin');
+    }
     public function index()
     {
         $pages = Post::orderBy('id', 'DESC')->where('post_type', 'page')->get();
-        return view('admin.page.index', compact('pages'));
+        return view('cms.pages.page.index', compact('pages'));
     }
 
     /**
@@ -30,7 +36,7 @@ class PageController extends Controller
      */
     public function create()
     {
-        return view('admin.page.create');
+        return view('cms.pages.page.create');
     }
 
     /**
@@ -89,7 +95,7 @@ class PageController extends Controller
     public function edit($id)
     {
         $page = Post::findOrFail($id);
-        return view('admin/page/edit', compact('page'));
+        return view('cms.pages.page.edit', compact('page'));
     }
 
     /**
