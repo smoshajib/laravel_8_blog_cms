@@ -18,7 +18,7 @@ class AdminDashboardController extends Controller
     public function index()
     {
 //        return auth('admin')->user();
-        return view('admin.dashboard');
+        return view('admin.pages.dashboard.dashboard');
     }
 
 //    public function getAllAdmin(ApiResponseService $apiResponseService): \Illuminate\Http\JsonResponse

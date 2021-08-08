@@ -1,4 +1,4 @@
-@extends('layouts.admin_master')
+@extends('admin.layouts.admin_master')
 
 @section('style')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet"/>

@@ -47,7 +47,7 @@ class AuthController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:admins',
             'password' => 'required|confirmed|min:6',
         ]);
     }
@@ -71,12 +71,14 @@ class AuthController extends Controller
 
     public function adminLogin()
     {
-        return view('admin.pages.auth.login');
+        return view('admin.auth.login');
     }
 
 
     public function adminLoginPost(Request $request)
     {
+
+        
         $this->validate($request, [
             'email' => 'required|email|exists:admins,email',
             'password' => 'required',

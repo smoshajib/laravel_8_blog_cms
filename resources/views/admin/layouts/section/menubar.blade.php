@@ -8,16 +8,7 @@
         </form>
     </div>
         <ul class="nav navbar-top-links navbar-right">
-            @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @endif
-                        @else
+      
             <li>
                 <span class="m-r-sm text-muted welcome-message">Welcome to Admin (<b>  {{ Auth::user()->name }}</b>) </span>
             </li>
@@ -129,7 +120,7 @@
                     <i class="fa fa-tasks"></i>
                 </a>
             </li>
-            @endguest
+          
         </ul>
 
     </nav>

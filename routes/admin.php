@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('admin.auth.login');
 });
 
 Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');

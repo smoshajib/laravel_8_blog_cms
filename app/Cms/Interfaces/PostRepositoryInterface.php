@@ -2,8 +2,9 @@
 
 namespace App\Cms\Interfaces;
 
-use App\Repositories\BaseRepositoryInterface;
+use App\Cms\BaseRepositoryInterface;
 use Illuminate\Http\Request;
+
 
 interface PostRepositoryInterface extends BaseRepositoryInterface
 {

@@ -8,31 +8,32 @@
 
     <title>@yield('title','Admin Panel')</title>
 
-    @include('layouts.section.style')
+    @include('admin.layouts.section.style')
     @yield('style')
 </head>
 
 <body>
     <div id="wrapper">
-        @include('layouts.section.navbar')
+        @include('admin.layouts.section.navbar')
 
         <div id="page-wrapper" class="gray-bg">
         <div class="row border-bottom">
-            @include('layouts.section.menubar')
+            @include('admin.layouts.section.menubar')
         </div>
             <div class="wrapper wrapper-content">
                 @yield('content')
             </div>
      
-                @include('layouts.section.footer')
+                @include('admin.layouts.section.footer')
         </div>
 
         
-        @include('layouts.section.rightsidebar')
+        @include('admin.layouts.section.rightsidebar')
     </div>
 
 
-    @include('layouts.section.script')
+    @include('admin.layouts.section.script')
+    
     @yield('script')
 
   

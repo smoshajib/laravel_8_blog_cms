@@ -1,4 +1,4 @@
-@extends('layouts.admin_master')
+@extends('admin.layouts.admin_master')
 
 @section('content')
     <div class="container">
@@ -11,12 +11,12 @@
                     </div>
                 @endif
 
-                    @if(Session::has('delete-message'))
-                        <div class="alert alert-danger alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-                            {{ Session('delete-message') }}
-                        </div>
-                    @endif
+                @if(Session::has('delete-message'))
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                        {{ Session('delete-message') }}
+                    </div>
+                @endif
             </div>
         </div>
 
@@ -24,8 +24,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        Category - list
-                        <a href="{{ route('categories.create') }}" class="btn btn-sm btn-primary float-right">Add
+                        Post - list
+                        <a href="{{ route('posts.create') }}" class="btn btn-sm btn-primary float-right">Add
                             New</a>
                     </div>
 
@@ -34,21 +34,23 @@
                             <thead>
                             <tr>
                                 <th scope="col" width="60">#</th>
-                                <th scope="col">Name</th>
+                                <th scope="col">Title</th>
+                                <th scope="col" width="200">Created By</th>
                                 <th scope="col" width="129">Action</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            @foreach($categories as $category)
+                            @foreach($posts as $post)
                                 <tr>
-                                    <td>{{ $category->id }}</td>
-                                    <td>{{ $category->name }}</td>
+                                    <td>{{ $post->id }}</td>
+                                    <td>{{ $post->title }}</td>
+                                    <td>{{ Auth::user()->name }}</td>
                                     <td>
-                                        <a href="{{ route('categories.edit', $category->id) }}"
+                                        <a href="{{ route('posts.edit', $post->id) }}"
                                            class="btn btn-sm btn-primary">Edit</a>
-                                           <a href="{{ route('categories.destroy',$category->id) }}" onclick="event.preventDefault();document.getElementById('category-delete').submit();" class="btn btn-sm btn-danger">Delete</a>
-                                           <form action="{{ route('categories.destroy', $category->id) }}" id="category-delete" method="post">@csrf  @method('DELETE')</form>
+                                           <a href="{{ route('posts.destroy',$post->id) }}" onclick="event.preventDefault();document.getElementById('posts-delete').submit();" class="btn btn-sm btn-danger">Delete</a>
+                                           <form action="{{ route('posts.destroy', $post->id) }}" id="posts-delete" method="post">@csrf  @method('DELETE')</form>
                                     </td>
                                 </tr>
                             @endforeach

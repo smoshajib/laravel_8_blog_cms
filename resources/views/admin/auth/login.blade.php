@@ -9,7 +9,7 @@
 
     <title>Admin | Login </title>
 
-    @include('layouts.section.style')
+    @include('admin.layouts.section.style')
 
 </head>
 

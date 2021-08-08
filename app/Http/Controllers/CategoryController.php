@@ -14,6 +14,8 @@ class CategoryController extends Controller
     public function __construct(CategoryRepositoryInterface $category)
     {
         $this->category = $category;
+        $this->middleware('airmin');
+        $this->middleware('auth:admin');
     }
 
     /**
@@ -24,7 +26,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::orderBy('id', 'DESC')->get();
-        return view('admin.category.index', compact('categories'));
+        return view('admin.pages.category.index', compact('categories'));
     }
 
     /**
@@ -34,7 +36,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        return view('admin.pages.category.create');
     }
 
     /**
@@ -80,7 +82,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category=Category::findOrFail($id);
-        return view('admin.category.edit', compact('category'));
+        return view('admin.pages.category.edit', compact('category'));
     }
 
     /**

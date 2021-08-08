@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Cms\Interfaces\PostRepositoryInterface;
 
 class PostController extends Controller
 {
@@ -17,10 +18,18 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected $post;
+    public function __construct(PostRepositoryInterface $post)
+    {
+        $this->post = $post;
+        $this->middleware('airmin');
+        $this->middleware('auth:admin');
+    }
     public function index()
     {
         $posts = Post::orderBy('id', 'DESC')->where('post_type', 'post')->get();
-        return view('admin.post.index', compact('posts'));
+        return view('admin.pages.post.index', compact('posts'));
     }
 
     /**
@@ -32,7 +41,7 @@ class PostController extends Controller
     {
         $categories = Category::orderBy('name', 'ASC')->get();
 //        dd($categories);
-        return view('admin.post.create', compact('categories'));
+        return view('admin.pages.post.create', compact('categories'));
     }
 
     /**
@@ -99,7 +108,7 @@ class PostController extends Controller
 
         $categories=Category::all();
         $post=Post::findOrFail($id);
-        return view('admin.post.edit', compact('categories','post'));
+        return view('admin.pages.post.edit', compact('categories','post'));
     }
 
     /**
