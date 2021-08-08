@@ -22,38 +22,14 @@
                 {{-- navbar section --}}
 
                 {{-- slider section --}}
-                @include('web.layouts.sections.slider')
+                @yield('after_nav')
                 {{-- slider section --}}
 
                 {{-- custom page --}}
-                @yield('main-content')
+                @yield('body-content')
                 {{-- custom page --}}
 
 
-                {{-- app section --}}
-                @include('web.layouts.sections.app')
-                {{-- app section --}}
-
-    
-                {{-- about section --}}
-                @include('web.layouts.sections.about')
-                {{-- about section --}}
-                    
-                    
-                {{-- work section --}}
-                @include('web.layouts.sections.work')
-                {{-- work section --}}
-            
-                {{-- testimonial section --}}
-                @include('web.layouts.sections.testimonial')
-                {{-- testimonial section --}}
-            
-
-                {{-- link section --}}
-                @include('web.layouts.sections.link')
-                {{-- link section --}}
-
-        
                 {{-- footer section --}}
                     @include('web.layouts.sections.footer')
                 {{-- footer section --}}
