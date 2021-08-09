@@ -31,11 +31,11 @@
                                 <span class="help-block">{!! $errors->first('sub_title') !!}</span>@endif
                         </div>
 
-                        <div class="form-group @if($errors->has('details')) has-error @endif">
+                        <div class="form-group @if($errors->has('content')) has-error @endif">
                             <label>Details</label>
-                            <textarea class="form-control" name="details"></textarea>
-                            @if ($errors->has('details'))
-                                <span class="help-block">{!! $errors->first('details') !!}</span>@endif
+                            <textarea class="form-control" name="content"></textarea>
+                            @if ($errors->has('content'))
+                                <span class="help-block">{!! $errors->first('content') !!}</span>@endif
                         </div>
 
                         <div class="form-group @if($errors->has('category_id')) has-error @endif">
@@ -95,7 +95,7 @@
 
     <script>
         $(document).ready(function () {
-            CKEDITOR.replace('details');
+            CKEDITOR.replace('content');
 
             $('#category_id').select2({
                 placeholder: "Select categories"

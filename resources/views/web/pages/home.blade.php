@@ -23,6 +23,7 @@
     {{-- testimonial section --}}
     @include('web.layouts.sections.testimonial')
     {{-- testimonial section --}}
+    
     {{-- link section --}}
     @include('web.layouts.sections.link')
     {{-- link section --}}

@@ -69,6 +69,8 @@ class PostController extends Controller
                 'title.unique' => 'Title already exist',
             ]
         );
+
+        // dd($request->all());
         $data = $request->only(['admin_id','title', 'slug', 'excerpt', 'content', 'post_type', 'is_published']);
         $post = $this->post->create($data);
 
