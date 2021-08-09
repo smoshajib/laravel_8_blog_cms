@@ -28,8 +28,7 @@ class PostController extends Controller
         $this->post = $post;
         $this->category = $category;
         $this->templates = Options::get_option('page_templates');
-        $this->middleware('airmin');
-        $this->middleware('auth:admin');
+        $this->middleware('airmin:admin');
     }
     public function index()
     {

@@ -12,9 +12,7 @@ class GalleryController extends Controller
 {
     public function __construct()
     {
-        
-        $this->middleware('airmin');
-        $this->middleware('auth:admin');
+        $this->middleware('airmin:admin');
     }
     /**
      * Display a listing of the resource.

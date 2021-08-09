@@ -14,8 +14,7 @@ class CategoryController extends Controller
     public function __construct(CategoryRepositoryInterface $category)
     {
         $this->category = $category;
-        $this->middleware('airmin');
-        $this->middleware('auth:admin');
+        $this->middleware('airmin:admin');
     }
 
     /**

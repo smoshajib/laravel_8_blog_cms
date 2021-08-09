@@ -11,8 +11,7 @@ class AdminDashboardController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('airmin');
-        $this->middleware('auth:admin');
+        $this->middleware('airmin:admin');
     }
 
     public function index()

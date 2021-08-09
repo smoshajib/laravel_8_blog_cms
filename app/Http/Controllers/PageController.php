@@ -25,8 +25,8 @@ class PageController extends Controller
     {
         $this->post = $post;
         $this->category = $category;
-        $this->middleware('airmin');
-        $this->middleware('auth:admin');
+        $this->middleware('airmin:admin');
+//        $this->middleware('auth');
     }
 
     public function index()

@@ -71,14 +71,14 @@ class AuthController extends Controller
 
     public function adminLogin()
     {
-        return view('admin.auth.login');
+        return view('cms.auth.login');
     }
 
 
     public function adminLoginPost(Request $request)
     {
 
-        
+
         $this->validate($request, [
             'email' => 'required|email|exists:admins,email',
             'password' => 'required',
