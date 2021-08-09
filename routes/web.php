@@ -21,12 +21,8 @@ Route::get('page/{post}', SiteController::class)->name('site');
 
 // demo check
 
-Route::get('tracking',[SiteController::class , 'tracking'])->name('tracking');
-Route::get('location',[SiteController::class , 'location'])->name('location');
-Route::get('about',[SiteController::class , 'about'])->name('about');
-Route::get('service',[SiteController::class , 'service'])->name('service');
-Route::get('faq',[SiteController::class , 'faq'])->name('faq');
-Route::get('help',[SiteController::class , 'help'])->name('help');
+Route::get('post/{page}',SiteController::class)->name('page');
+
 
 Auth::routes();
 

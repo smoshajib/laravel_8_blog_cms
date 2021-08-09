@@ -14,38 +14,21 @@ class SiteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function __invoke(Post $post, Request $request)
+    // public function __invoke(Post $post, Request $request)
+    // {
+    //     $view = 'web.pages.'.$post->template;
+    //     if (View::exists($view)) {
+    //         return view($view, compact('post'));
+    //     }  else {
+    //         return view('web.pages.default', compact('post'));
+    //     }
+    // }
+    
+    public function __invoke($page)
     {
-        $view = 'web.pages.'.$post->template;
-        if (View::exists($view)) {
-            return view($view, compact('post'));
-        }  else {
-            return view('web.pages.default', compact('post'));
-        }
+       
+        return view('web.pages.'.$page);
+        
     }
 
-    public function tracking()
-    {
-        return view('web.pages.tracking');
-    }
-    public function location()
-    {
-        return view('web.pages.location');
-    }
-    public function about()
-    {
-        return view('web.pages.about');
-    }
-    public function service()
-    {
-        return view('web.pages.service');
-    }
-    public function faq()
-    {
-        return view('web.pages.faq');
-    }
-    public function help()
-    {
-        return view('web.pages.help');
-    }
 }
