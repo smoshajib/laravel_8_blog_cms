@@ -6,11 +6,8 @@ use Alright\Options\Options;
 use App\Cms\Interfaces\CategoryRepositoryInterface;
 use App\Models\Post;
 use App\Models\Category;
-use App\Models\CategoryPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use App\Cms\Interfaces\PostRepositoryInterface;
 
 class PostController extends Controller

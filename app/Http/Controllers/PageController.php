@@ -4,27 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Cms\Interfaces\CategoryRepositoryInterface;
 use App\Cms\Interfaces\PostRepositoryInterface;
+use App\Cms\Services\LeuraCms;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\CategoryPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
     protected $post;
     protected $category;
+    protected $lcms;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(PostRepositoryInterface $post, CategoryRepositoryInterface $category)
+    public function __construct(PostRepositoryInterface $post, CategoryRepositoryInterface $category, LeuraCms $lcms)
     {
         $this->post = $post;
         $this->category = $category;
+        $this->lcms = $lcms;
         $this->middleware('airmin:admin');
 //        $this->middleware('auth');
     }
@@ -42,7 +46,8 @@ class PageController extends Controller
      */
     public function create()
     {
-        return view('cms.pages.page.create');
+        $templates = $this->lcms->templates();
+        return view('cms.pages.page.create', compact('templates'));
     }
 
     /**
@@ -65,7 +70,7 @@ class PageController extends Controller
                 'title.unique' => 'Title already exist',
             ]
         );
-        $data = $request->only(['admin_id','title', 'slug', 'excerpt', 'content', 'post_type', 'is_published']);
+        $data = $request->only(['admin_id','title', 'slug', 'excerpt', 'content', 'post_type', 'template', 'is_published']);
         $post = $this->post->create($data);
 
         Session::flash('message', 'Page created successfully');
@@ -105,9 +110,7 @@ class PageController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            "thumbnail" => 'required',
             'title' => 'required|unique:posts,title,'.$id.',id',
-            'details' => 'required',
         ],
             [
                 'thumbnail.required' => 'Enter thumbnail url',
