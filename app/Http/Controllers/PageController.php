@@ -5,14 +5,9 @@ namespace App\Http\Controllers;
 use App\Cms\Interfaces\CategoryRepositoryInterface;
 use App\Cms\Interfaces\PostRepositoryInterface;
 use App\Cms\Services\LeuraCms;
-use App\Models\Post;
-use App\Models\Category;
-use App\Models\CategoryPost;
+use App\Models\Post as Page;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
@@ -30,9 +25,7 @@ class PageController extends Controller
         $this->category = $category;
         $this->lcms = $lcms;
         $this->middleware('airmin:admin');
-//        $this->middleware('auth');
     }
-
     public function index()
     {
         $pages = $this->post->getPosts('DESC', 'page');
@@ -46,8 +39,9 @@ class PageController extends Controller
      */
     public function create()
     {
+        $categories = $this->category->getCategories('name', 'ASC');
         $templates = $this->lcms->templates();
-        return view('cms.pages.page.create', compact('templates'));
+        return view('cms.pages.page.create', compact('categories', 'templates'));
     }
 
     /**
@@ -71,10 +65,9 @@ class PageController extends Controller
             ]
         );
         $data = $request->only(['admin_id','title', 'slug', 'excerpt', 'content', 'post_type', 'template', 'is_published']);
-        $post = $this->post->create($data);
-
+        $page = $this->post->create($data);
         Session::flash('message', 'Page created successfully');
-        return redirect()->route('cms.pages.page.index');
+        return redirect()->route('pages.index');
     }
 
     /**
@@ -83,9 +76,9 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Page $page)
     {
-        //
+        return $page->template;
     }
 
     /**
@@ -94,10 +87,11 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Page $page)
     {
-        $page = Post::findOrFail($id);
-        return view('cms.pages.page.edit', compact('page'));
+        $templates = $this->lcms->templates();
+//        $page = $this->post->find($p->id);
+        return view('cms.pages.page.edit', compact('templates', 'page'));
     }
 
     /**
@@ -107,31 +101,25 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Page $page)
     {
+        $request->merge([
+            'admin_id' => \auth('admin')->id(),
+            'post_type' => 'page'
+        ]);
         $this->validate($request, [
-            'title' => 'required|unique:posts,title,'.$id.',id',
+            'title' => 'required|unique:posts,title,' . $page->id . ',id', // ignore this id
         ],
             [
-                'thumbnail.required' => 'Enter thumbnail url',
                 'title.required' => 'Enter title',
                 'title.unique' => 'Title already exist',
-                'details.required' => 'Enter details',
             ]
         );
 
-        $page = Post::findOrFail($id);
-        $page->admin_id = \auth('admin')->id();;
-        $page->thumbnail = $request->thumbnail;
-        $page->title = $request->title;
-        $page->slug = str::slug($request->title);
-        $page->sub_title = $request->sub_title;
-        $page->details = $request->details;
-        $page->is_published = $request->is_published;
-        $page->save();
-
+        $data = $request->only(['admin_id','title', 'slug', 'excerpt', 'content', 'post_type', 'template', 'is_published']);
+        $postUpdate = $this->post->update($page->id, $data);
         Session::flash('message', 'Page updated successfully');
-        return redirect()->route('cms.pages.page.index');
+        return redirect()->route('pages.index');
     }
 
     /**
@@ -140,11 +128,10 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Page $page)
     {
-        $page = Post::findOrFail($id);
         $page->delete();
-        Session::flash('delete-message', 'Post page deleted successfully');
-        return redirect()->route('admin.pages.page.index');
+        Session::flash('delete-message', 'Page deleted successfully');
+        return redirect()->route('pages.index');
     }
 }

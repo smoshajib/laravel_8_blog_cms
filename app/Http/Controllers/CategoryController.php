@@ -91,7 +91,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request,Category $category)
+    public function update(Request $request, Category $category)
     {
         $this->validate($request, [
             'name' => 'required|unique:categories,name,' . $category->id,

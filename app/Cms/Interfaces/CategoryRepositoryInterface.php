@@ -6,5 +6,5 @@ use App\Cms\BaseRepositoryInterface;
 
 interface CategoryRepositoryInterface extends BaseRepositoryInterface
 {
-
+    public function getCategories($orderby, $order);
 }

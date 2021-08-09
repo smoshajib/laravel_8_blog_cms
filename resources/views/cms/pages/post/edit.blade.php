@@ -13,7 +13,7 @@
 
                     <div class="card-body">
 
-                          <form  action="{{route('posts.update',$post->id)}}" method="post">
+                          <form  action="{{route('posts.update',$post->slug)}}" method="post">
                             @csrf
                             @method('PUT')
 

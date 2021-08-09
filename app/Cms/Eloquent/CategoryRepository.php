@@ -70,12 +70,17 @@ class CategoryRepository extends AbstractRepository implements CategoryRepositor
         return $this->model->where($where)->first();
     }
 
-    public function datatable(Request $request, $postType): \Illuminate\Database\Query\Builder
+    public function datatable(Request $request): \Illuminate\Database\Query\Builder
     {
-        $data = DB::table('posts')
+        $data = DB::table('categories')
             ->select(
                 '*'
             );
         return $data;
+    }
+
+    public function getCategories($orderby, $order)
+    {
+        return $this->model->orderBy($orderby, $order)->get();
     }
 }

@@ -37,7 +37,15 @@
                                 @if ($errors->has('content'))
                                     <span class="help-block">{!! $errors->first('content') !!}</span>@endif
                             </div>
-
+                            <div class="form-group">
+                                <label>Page Template</label>
+                                <select class="form-control" name="template">
+                                    <option disabled selected>Select Template</option>
+                                    @foreach($templates as $template)
+                                        <option value="{{$template}}">{{$template}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label>Status</label>
                                 <select class="form-control" name="is_published">

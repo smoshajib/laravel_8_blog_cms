@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Alright\Options\Options;
 use App\Cms\Interfaces\CategoryRepositoryInterface;
+use App\Cms\Services\LeuraCms;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -14,22 +15,22 @@ class PostController extends Controller
 {
     protected $post;
     protected $category;
-    protected $templates;
+    protected $lcms;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(PostRepositoryInterface $post, CategoryRepositoryInterface $category)
+    public function __construct(PostRepositoryInterface $post, CategoryRepositoryInterface $category, LeuraCms $lcms)
     {
         $this->post = $post;
         $this->category = $category;
-        $this->templates = Options::get_option('page_templates');
+        $this->lcms = $lcms;
         $this->middleware('airmin:admin');
     }
     public function index()
     {
-        $posts = Post::orderBy('id', 'DESC')->where('post_type', 'post')->get();
+        $posts = $this->post->getPosts('DESC', 'post');
         return view('cms.pages.post.index', compact('posts'));
     }
 
@@ -40,8 +41,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::orderBy('name', 'ASC')->get();
-        $templates = $this->templates;
+        $categories = $this->category->getCategories('name', 'ASC');
+        $templates = $this->lcms->templates();
         return view('cms.pages.post.create', compact('categories', 'templates'));
     }
 
@@ -65,13 +66,10 @@ class PostController extends Controller
                 'title.unique' => 'Title already exist',
             ]
         );
-        $data = $request->only(['admin_id','title', 'slug', 'excerpt', 'content', 'post_type', 'is_published']);
+        $data = $request->only(['admin_id','title', 'slug', 'excerpt', 'content', 'post_type', 'template', 'is_published']);
         $post = $this->post->create($data);
 
-        $post->categories()->sync($request->category_id,$post->id);
-        // dd($request->category_id);
-
-
+        $post->categories()->sync($request->category_id, $post->id);
         Session::flash('message', 'Post created successfully');
         return redirect()->route('posts.index');
     }
@@ -93,12 +91,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-
-        $categories= $this->category->getAll();
-        $templates = $this->templates;
-        $post=Post::findOrFail($id);
+        $categories = $this->category->getCategories('name', 'ASC');
+        $templates = $this->lcms->templates();
+        $post= $this->post->find($post->id);
         return view('cms.pages.post.edit', compact('categories', 'templates', 'post'));
     }
 
@@ -124,7 +121,7 @@ class PostController extends Controller
             ]
         );
 
-        $data = $request->only(['admin_id','title', 'slug', 'excerpt', 'content', 'post_type', 'is_published']);
+        $data = $request->only(['admin_id','title', 'slug', 'excerpt', 'content', 'post_type', 'template', 'is_published']);
         $postUpdate = $this->post->update($post->id, $data);
         $postUpdate->categories()->sync($request->input('category_id'));
 
@@ -136,7 +133,7 @@ class PostController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Post $post)
     {

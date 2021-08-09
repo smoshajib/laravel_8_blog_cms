@@ -8,12 +8,12 @@
                     <div class="card-header">Page - edit</div>
 
                     <div class="card-body">
-                        
-                        <form  action="{{route('pages.update',$page->id)}}" method="post">
+
+                        <form  action="{{route('pages.update',$page->slug)}}" method="post">
                             @csrf
                             @method('PUT')
                         <div class="box-body">
-                        
+
 
                             <div class="form-group @if($errors->has('title')) has-error @endif">
                                 <label>Title</label>
@@ -35,20 +35,28 @@
                                 @if ($errors->has('details'))
                                     <span class="help-block">{!! $errors->first('details') !!}</span>@endif
                             </div>
-
+                            <div class="form-group">
+                                <label>Page Template</label>
+                                <select class="form-control" name="template">
+                                    <option disabled>Select Template</option>
+                                    @foreach($templates as $template)
+                                        <option value="{{$template}}" @if($template == $page->template) selected @endif>{{$template}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="form-group">
                                 <label>Status</label>
-                                <select class="form-control" name="is_published"> 
+                                <select class="form-control" name="is_published">
                                     <option disabled selected>Select Status</option>
                                     <option value="1" {{ $page->is_published == 1 ? 'selected' : '' }}>Published</option>
                                     <option value="0" {{ $page->is_published == 0 ? 'selected' : '' }}>Draft</option>
-                                </select>  
+                                </select>
                             </div>
                         </div>
                         <div class="form-group @if($errors->has('featured_image')) has-error @endif">
                             <label>Featured Image</label>
                             <input type="file" class="form-control" name="featured_image" >
-                            
+
                             @if ($errors->has('featured_image'))
                                 <span class="help-block">{!! $errors->first('featured_image') !!}</span>@endif
                         </div>

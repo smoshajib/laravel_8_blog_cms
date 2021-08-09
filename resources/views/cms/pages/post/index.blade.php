@@ -47,9 +47,9 @@
                                     <td>{{ $post->title }}</td>
                                     <td>{{ Auth::user()->name }}</td>
                                     <td>
-                                        <a href="{{ route('posts.edit', $post->id) }}"
+                                        <a href="{{ route('posts.edit', $post->slug) }}"
                                            class="btn btn-sm btn-primary">Edit</a>
-                                           <a href="{{ route('posts.destroy',$post->id) }}" onclick="event.preventDefault();document.getElementById('posts-delete').submit();" class="btn btn-sm btn-danger">Delete</a>
+                                           <a href="{{ route('posts.destroy',$post->slug) }}" onclick="event.preventDefault();document.getElementById('posts-delete').submit();" class="btn btn-sm btn-danger">Delete</a>
                                            <form action="{{ route('posts.destroy', $post->id) }}" id="posts-delete" method="post">@csrf  @method('DELETE')</form>
                                     </td>
                                 </tr>
