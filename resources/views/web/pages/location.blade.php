@@ -59,7 +59,7 @@ Location Page
               <div class="row">
                 <div class="col-1 col-md-2 col-lg-1 mb-2 mb-sm-0">
                   <img
-                    src="{{'frontend'}}/assets/Others icon/address icon.png"
+                    src="{{asset('frontend')}}/assets/Others icon/address icon.png"
                     class="location-icon"
                     alt=""
                   />
@@ -82,7 +82,7 @@ Location Page
               <div class="row">
                 <div class="col-1 col-md-2 col-lg-1 mb-2 mb-sm-0">
                   <img
-                    src="{{'frontend'}}/assets/Others icon/address icon.png"
+                    src="{{asset('frontend')}}/assets/Others icon/address icon.png"
                     class="location-icon"
                     alt=""
                   />
@@ -107,7 +107,7 @@ Location Page
               <div class="row">
                 <div class="col-1 col-md-2 col-lg-1 mb-2 mb-sm-0">
                   <img
-                    src="{{'frontend'}}/assets/Others icon/address icon.png"
+                    src="{{asset('frontend')}}/assets/Others icon/address icon.png"
                     class="location-icon"
                     alt=""
                   />
@@ -132,7 +132,7 @@ Location Page
               <div class="row">
                 <div class="col-1 col-md-2 col-lg-1 mb-2 mb-sm-0">
                   <img
-                    src="{{'frontend'}}/assets/Others icon/address icon.png"
+                    src="{{asset('frontend')}}/assets/Others icon/address icon.png"
                     class="location-icon"
                     alt=""
                   />
@@ -171,7 +171,7 @@ Location Page
               <div class="row">
                 <div class="col-1 col-md-2 col-lg-1 mb-2 mb-sm-0">
                   <img
-                    src="{{'frontend'}}/assets/Others icon/address icon.png"
+                    src="{{asset('frontend')}}/assets/Others icon/address icon.png"
                     class="location-icon"
                     alt=""
                   />
@@ -196,7 +196,7 @@ Location Page
               <div class="row">
                 <div class="col-1 col-md-2 col-lg-1 mb-2 mb-sm-0">
                   <img
-                    src="{{'frontend'}}/assets/Others icon/address icon.png"
+                    src="{{asset('frontend')}}/assets/Others icon/address icon.png"
                     class="location-icon"
                     alt=""
                   />
@@ -221,7 +221,7 @@ Location Page
               <div class="row">
                 <div class="col-1 col-md-2 col-lg-1 mb-2 mb-sm-0">
                   <img
-                    src="{{'frontend'}}/assets/Others icon/address icon.png"
+                    src="{{asset('frontend')}}/assets/Others icon/address icon.png"
                     class="location-icon"
                     alt=""
                   />
@@ -246,7 +246,7 @@ Location Page
               <div class="row">
                 <div class="col-1 col-md-2 col-lg-1 mb-2 mb-sm-0">
                   <img
-                    src="{{'frontend'}}/assets/Others icon/address icon.png"
+                    src="{{asset('frontend')}}/assets/Others icon/address icon.png"
                     class="location-icon"
                     alt=""
                   />
@@ -287,7 +287,7 @@ Location Page
               <div class="row">
                 <div class="col-1 col-md-2 col-lg-1 mb-2 mb-sm-0">
                   <img
-                    src="{{'frontend'}}/assets/Others icon/address icon.png"
+                    src="{{asset('frontend')}}/assets/Others icon/address icon.png"
                     class="location-icon"
                     alt=""
                   />
@@ -312,7 +312,7 @@ Location Page
               <div class="row">
                 <div class="col-1 col-md-2 col-lg-1 mb-2 mb-sm-0">
                   <img
-                    src="{{'frontend'}}/assets/Others icon/address icon.png"
+                    src="{{asset('frontend')}}/assets/Others icon/address icon.png"
                     class="location-icon"
                     alt=""
                   />
