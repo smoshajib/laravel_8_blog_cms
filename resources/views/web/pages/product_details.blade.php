@@ -404,4 +404,5 @@ Details Page
 @endsection
 
 @section('script')
+
 @endsection
