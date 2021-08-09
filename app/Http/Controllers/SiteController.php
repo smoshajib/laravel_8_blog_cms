@@ -40,4 +40,8 @@ class SiteController extends Controller
     {
         return view('web.pages.service');
     }
+    public function faq()
+    {
+        return view('web.pages.faq');
+    }
 }

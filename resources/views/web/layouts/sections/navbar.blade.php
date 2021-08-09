@@ -30,7 +30,7 @@
             <a class="nav-link" href="{{ route('service') }}">Service</a>
           </li>
           <li class="nav-item ml-lg-3">
-            <a class="nav-link" href="faq.html">FAQ</a>
+            <a class="nav-link" href="{{ route('faq') }}">FAQ</a>
           </li>
           <li class="nav-item ml-lg-3">
             <a class="nav-link" href="help.html">Help</a>
