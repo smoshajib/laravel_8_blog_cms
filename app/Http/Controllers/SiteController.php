@@ -28,6 +28,10 @@ class SiteController extends Controller
     {
         return view('web.pages.tracking');
     }
+    public function location()
+    {
+        return view('web.pages.location');
+    }
     public function about()
     {
         return view('web.pages.about');

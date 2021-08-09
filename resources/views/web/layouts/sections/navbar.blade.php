@@ -21,7 +21,7 @@
             <a class="nav-link" href="{{ route('tracking') }}">Tracking</a>
           </li>
           <li class="nav-item ml-lg-3">
-            <a class="nav-link" href="location.html">Location</a>
+            <a class="nav-link" href="{{ route('location') }}">Location</a>
           </li>
           <li class="nav-item ml-lg-3">
             <a class="nav-link" href="{{ route('about') }}">About US</a>
