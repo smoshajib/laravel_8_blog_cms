@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light" id="mainNavbar">
     <div class="container">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="{{url('/')}}">
         <img src="{{asset('frontend')}}/assets/home/Group 2301.png" alt="" class="img-fluid" />
       </a>
       <button
@@ -17,28 +17,29 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="{{ route('site', ['tracking']) }}">Tracking</a>
+            {{-- <a class="nav-link" href="{{ route('site', ['tracking']) }}">Tracking</a> --}}
+            <a class="nav-link" href="{{ route('page',['tracking']) }}">Tracking</a>
           </li>
           <li class="nav-item ml-lg-3">
-            <a class="nav-link" href="location.html">Location</a>
+            <a class="nav-link" href="{{ route('page',['location']) }}">Location</a>
           </li>
           <li class="nav-item ml-lg-3">
-            <a class="nav-link" href="about.html">About US</a>
+            <a class="nav-link" href="{{ route('page',['about']) }}">About US</a>
           </li>
           <li class="nav-item ml-lg-3">
-            <a class="nav-link" href="service.html">Service</a>
+            <a class="nav-link" href="{{ route('page',['service']) }}">Service</a>
           </li>
           <li class="nav-item ml-lg-3">
-            <a class="nav-link" href="faq.html">FAQ</a>
+            <a class="nav-link" href="{{ route('page',['faq']) }}">FAQ</a>
           </li>
           <li class="nav-item ml-lg-3">
-            <a class="nav-link" href="help.html">Help</a>
+            <a class="nav-link" href="{{ route('page',['help']) }}">Help</a>
           </li>
           <li class="nav-item ml-lg-3">
-            <a class="nav-link" href="offers.html">Offers</a>
+            <a class="nav-link" href="{{ route('page',['offers']) }}">Offers</a>
           </li>
           <li class="nav-item ml-lg-3">
-            <a class="nav-link" href="store.html">Shop store</a>
+            <a class="nav-link" href="{{ route('page',['store']) }}">Shop store</a>
           </li>
         </ul>
       </div>
