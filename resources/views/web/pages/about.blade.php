@@ -1,5 +1,8 @@
 @extends('web.layouts.master')
 
+@section('title')
+About Page
+@endsection
 
 @section('after_nav')
 <div class="jumbotron jumbotron-about text-center text-white">

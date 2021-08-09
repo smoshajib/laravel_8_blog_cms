@@ -22,6 +22,7 @@ Route::get('page/{post}', SiteController::class)->name('site');
 // demo check
 
 Route::get('about',[SiteController::class , 'about'])->name('about');
+Route::get('service',[SiteController::class , 'service'])->name('service');
 
 Auth::routes();
 

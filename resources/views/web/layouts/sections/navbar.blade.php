@@ -17,7 +17,8 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="{{ route('site', ['tracking']) }}">Tracking</a>
+            {{-- <a class="nav-link" href="{{ route('site', ['tracking']) }}">Tracking</a> --}}
+            <a class="nav-link" href="{{ route('tracking') }}">Tracking</a>
           </li>
           <li class="nav-item ml-lg-3">
             <a class="nav-link" href="location.html">Location</a>
@@ -26,7 +27,7 @@
             <a class="nav-link" href="{{ route('about') }}">About US</a>
           </li>
           <li class="nav-item ml-lg-3">
-            <a class="nav-link" href="service.html">Service</a>
+            <a class="nav-link" href="{{ route('service') }}">Service</a>
           </li>
           <li class="nav-item ml-lg-3">
             <a class="nav-link" href="faq.html">FAQ</a>

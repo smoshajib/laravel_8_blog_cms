@@ -24,8 +24,16 @@ class SiteController extends Controller
         }
     }
 
+    public function tracking()
+    {
+        return view('web.pages.tracking');
+    }
     public function about()
     {
         return view('web.pages.about');
+    }
+    public function service()
+    {
+        return view('web.pages.service');
     }
 }
