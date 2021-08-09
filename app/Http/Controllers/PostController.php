@@ -71,7 +71,7 @@ class PostController extends Controller
         );
 
         // dd($request->all());
-        $data = $request->only(['admin_id','title', 'slug', 'excerpt', 'content', 'post_type', 'is_published']);
+        $data = $request->only(['admin_id','title', 'slug', 'excerpt', 'content', 'post_type','template', 'is_published']);
         $post = $this->post->create($data);
 
         $post->categories()->sync($request->category_id,$post->id);
@@ -130,7 +130,7 @@ class PostController extends Controller
             ]
         );
 
-        $data = $request->only(['admin_id','title', 'slug', 'excerpt', 'content', 'post_type', 'is_published']);
+        $data = $request->only(['admin_id','title', 'slug', 'excerpt', 'content', 'post_type','template', 'is_published']);
         $postUpdate = $this->post->update($post->id, $data);
         $postUpdate->categories()->sync($request->input('category_id'));
 

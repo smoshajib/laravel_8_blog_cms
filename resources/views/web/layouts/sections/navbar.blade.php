@@ -23,7 +23,7 @@
             <a class="nav-link" href="location.html">Location</a>
           </li>
           <li class="nav-item ml-lg-3">
-            <a class="nav-link" href="about.html">About US</a>
+            <a class="nav-link" href="{{ route('about') }}">About US</a>
           </li>
           <li class="nav-item ml-lg-3">
             <a class="nav-link" href="service.html">Service</a>

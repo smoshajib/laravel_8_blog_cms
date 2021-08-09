@@ -23,4 +23,9 @@ class SiteController extends Controller
             return view('web.pages.default', compact('post'));
         }
     }
+
+    public function about()
+    {
+        return view('web.pages.about');
+    }
 }

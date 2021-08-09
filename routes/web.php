@@ -19,6 +19,10 @@ Route::get('/', function () {
 
 Route::get('page/{post}', SiteController::class)->name('site');
 
+// demo check
+
+Route::get('about',[SiteController::class , 'about'])->name('about');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
