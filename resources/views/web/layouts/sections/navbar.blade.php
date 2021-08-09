@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light" id="mainNavbar">
     <div class="container">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="{{url('/')}}">
         <img src="{{asset('frontend')}}/assets/home/Group 2301.png" alt="" class="img-fluid" />
       </a>
       <button

@@ -23,11 +23,13 @@ Shop Page
     <div class="container">
       <div class="row">
         <div class="col-sm-6 col-md-4 col-lg-3 mb-2 mb-md-4">
+         <a href="{{ route('page',['product_details']) }}">
           <img
             src="{{asset('frontend')}}/assets/store/Rectangle - 1.png"
             class="img-fluid"
             alt=""
           />
+        </a>
           <div
             class="
               text-gray-dark
