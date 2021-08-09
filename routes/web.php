@@ -26,6 +26,7 @@ Route::get('location',[SiteController::class , 'location'])->name('location');
 Route::get('about',[SiteController::class , 'about'])->name('about');
 Route::get('service',[SiteController::class , 'service'])->name('service');
 Route::get('faq',[SiteController::class , 'faq'])->name('faq');
+Route::get('help',[SiteController::class , 'help'])->name('help');
 
 Auth::routes();
 

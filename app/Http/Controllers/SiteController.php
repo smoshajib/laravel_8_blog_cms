@@ -44,4 +44,8 @@ class SiteController extends Controller
     {
         return view('web.pages.faq');
     }
+    public function help()
+    {
+        return view('web.pages.help');
+    }
 }

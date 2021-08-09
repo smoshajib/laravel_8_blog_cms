@@ -33,7 +33,7 @@
             <a class="nav-link" href="{{ route('faq') }}">FAQ</a>
           </li>
           <li class="nav-item ml-lg-3">
-            <a class="nav-link" href="help.html">Help</a>
+            <a class="nav-link" href="{{ route('help') }}">Help</a>
           </li>
           <li class="nav-item ml-lg-3">
             <a class="nav-link" href="offers.html">Offers</a>
