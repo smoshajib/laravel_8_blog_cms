@@ -49,7 +49,7 @@ Blog Page
                   sentences fly into your mouth. Even the all-powerful
                   Pointing has roasted parts of sentences fly into your mouth
                 </p>
-                <a href="{{ route('page',['single_blog']) }}" class="btn btn-primary px-3">Read more</a>
+                <a href="{{ route('site',['single_blog']) }}" class="btn btn-primary px-3">Read more</a>
               </div>
             </div>
             <!-- Blog row -->

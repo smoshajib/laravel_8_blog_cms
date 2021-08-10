@@ -18,28 +18,28 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
             {{-- <a class="nav-link" href="{{ route('site', ['tracking']) }}">Tracking</a> --}}
-            <a class="nav-link" href="{{ route('page',['tracking']) }}">Tracking</a>
+            <a class="nav-link" href="{{ route('site',['tracking']) }}">Tracking</a>
           </li>
           <li class="nav-item ml-lg-3">
-            <a class="nav-link" href="{{ route('page',['location']) }}">Location</a>
+            <a class="nav-link" href="{{ route('site',['location']) }}">Location</a>
           </li>
           <li class="nav-item ml-lg-3">
-            <a class="nav-link" href="{{ route('page',['about']) }}">About US</a>
+            <a class="nav-link" href="{{ route('site',['about']) }}">About US</a>
           </li>
           <li class="nav-item ml-lg-3">
-            <a class="nav-link" href="{{ route('page',['service']) }}">Service</a>
+            <a class="nav-link" href="{{ route('site',['service']) }}">Service</a>
           </li>
           <li class="nav-item ml-lg-3">
-            <a class="nav-link" href="{{ route('page',['faq']) }}">FAQ</a>
+            <a class="nav-link" href="{{ route('site',['faq']) }}">FAQ</a>
           </li>
           <li class="nav-item ml-lg-3">
-            <a class="nav-link" href="{{ route('page',['help']) }}">Help</a>
+            <a class="nav-link" href="{{ route('site',['help']) }}">Help</a>
           </li>
           <li class="nav-item ml-lg-3">
-            <a class="nav-link" href="{{ route('page',['offers']) }}">Offers</a>
+            <a class="nav-link" href="{{ route('site',['offers']) }}">Offers</a>
           </li>
           <li class="nav-item ml-lg-3">
-            <a class="nav-link" href="{{ route('page',['store']) }}">Shop store</a>
+            <a class="nav-link" href="{{ route('site',['store']) }}">Shop store</a>
           </li>
         </ul>
       </div>

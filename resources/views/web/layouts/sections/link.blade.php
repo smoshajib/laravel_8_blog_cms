@@ -5,7 +5,7 @@
           <h3>Quick Links</h3>
           <ul class="nav justify-content-center quick-links">
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('page',['blog']) }}">Blog</a>
+              <a class="nav-link" href="{{ route('site',['blog']) }}">Blog</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Career</a>

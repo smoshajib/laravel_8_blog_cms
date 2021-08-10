@@ -104,7 +104,7 @@ Details Page
                 </div>
               </div>
               <div class="col-md-7 col-lg-5">
-                <a href="{{ route('page',['cart']) }}" class="product-link d-block">
+                <a href="{{ route('site',['cart']) }}" class="product-link d-block">
                   <div class="row">
                     <div class="col-3 bg-dark text-white p-3">
                       <img
