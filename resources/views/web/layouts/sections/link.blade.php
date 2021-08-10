@@ -8,7 +8,7 @@
               <a class="nav-link" href="{{ route('page',['blog']) }}">Blog</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Career</a>
+              <a class="nav-link" href="{{ route('page',['career']) }}">Career</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Terms</a>
