@@ -13,7 +13,7 @@
 
                     <div class="card-body">
 
-                        <form action="{{route('posts.store')}}" method="post">
+                        <form enctype="multipart/form-data" action="{{route('posts.store')}}" method="post">
                             @csrf
 
 

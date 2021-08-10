@@ -67,10 +67,8 @@ class PageController extends Controller
         $data = $request->only(['admin_id','title', 'slug', 'excerpt', 'content', 'post_type', 'template', 'is_published']);
         $page = $this->post->create($data);
         if($request->hasfile('featured_image')) {
-            foreach($request->file('featured_image') as $file)
-            {
-                $page->addMedia($file)->toMediaCollection();
-            }
+            $file = $request->file('featured_image');
+            $this->lcms->manageMedia($page, $file);
         }
         Session::flash('message', 'Page created successfully');
         return redirect()->route('pages.index');
@@ -124,10 +122,8 @@ class PageController extends Controller
         $data = $request->only(['admin_id','title', 'slug', 'excerpt', 'content', 'post_type', 'template', 'is_published']);
         $postUpdate = $this->post->update($page->id, $data);
         if($request->hasfile('featured_image')) {
-            foreach($request->file('featured_image') as $file)
-            {
-                $postUpdate->addMedia($file)->toMediaCollection();
-            }
+            $file = $request->file('featured_image');
+            $this->lcms->manageMedia($postUpdate, $file);
         }
         Session::flash('message', 'Page updated successfully');
         return redirect()->route('pages.index');

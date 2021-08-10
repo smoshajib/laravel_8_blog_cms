@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "292e156f3c6029ad2be6b2bb12c38143",
+    "content-hash": "170343d209b7e6a1c98f126988f9ac15",
     "packages": [
         {
             "name": "a300/options",

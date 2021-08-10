@@ -10,6 +10,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Cms\Interfaces\PostRepositoryInterface;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -68,7 +69,10 @@ class PostController extends Controller
         );
         $data = $request->only(['admin_id','title', 'slug', 'excerpt', 'content', 'post_type', 'template', 'is_published']);
         $post = $this->post->create($data);
-
+        if($request->hasfile('featured_image')) {
+            $file = $request->file('featured_image');
+            $post->addMedia($file)->toMediaCollection('as-web');
+        }
         $post->categories()->sync($request->category_id, $post->id);
         Session::flash('message', 'Post created successfully');
         return redirect()->route('posts.index');
@@ -108,6 +112,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+
         $request->merge([
             'admin_id' => \auth('admin')->id(),
             'post_type' => 'post'
@@ -124,7 +129,10 @@ class PostController extends Controller
         $data = $request->only(['admin_id','title', 'slug', 'excerpt', 'content', 'post_type', 'template', 'is_published']);
         $postUpdate = $this->post->update($post->id, $data);
         $postUpdate->categories()->sync($request->input('category_id'));
-
+        if($request->hasfile('featured_image')) {
+            $file = $request->file('featured_image');
+            $postUpdate->addMedia($file)->toMediaCollection('as-web');
+        }
         Session::flash('message', 'Post updated successfully');
         return redirect()->route('posts.index');
     }

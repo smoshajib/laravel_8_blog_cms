@@ -13,7 +13,7 @@
 
                     <div class="card-body">
 
-                          <form  action="{{route('posts.update',$post->slug)}}" method="post">
+                          <form enctype="multipart/form-data" action="{{route('posts.update',$post->slug)}}" method="post">
                             @csrf
                             @method('PUT')
 
@@ -68,6 +68,10 @@
                                 <option value="0" {{ $post->is_published == 0 ? 'selected' : '' }}>Draft</option>
                             </select>
                         </div>
+
+                          @if($post->hasMedia('as-web'))
+                            <img src="{{ $post->getFirstMediaUrl('as-web',  'thumb') }}" alt="">
+                          @endif
                         <div class="form-group @if($errors->has('featured_image')) has-error @endif">
                             <label>Featured Image</label>
                             <input type="file" class="form-control" name="featured_image" >
